@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import { useState } from "react";
 import './App.css';
 
 function App() {
+  const [num, setNum] = useState(0);
+
+  const maxAvailableItems = 15;
+  const minimumValue = 0;
+
+  function suma(i) {
+    if (typeof i === "number") {
+      setNum(num + i);
+    }
+  }
+
+  function resta(i) {
+    // revisar que el tipo de i sea === number
+    if (typeof i === "number") {
+      setNum(num - i);
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="contador">
+        <button className="button" onClick={() => resta(1)} disabled={num <= minimumValue}>
+          -
+        </button>
+        <p>contador {num}</p>
+        <button
+          className="button"
+          onClick={() => suma(1)}
+          // deshabilitar cuando el contador sea mayor o igual a $variable
+          disabled={num >= maxAvailableItems}
         >
-          Learn React
-        </a>
-      </header>
+          +
+        </button>
+      </div>
     </div>
   );
 }
